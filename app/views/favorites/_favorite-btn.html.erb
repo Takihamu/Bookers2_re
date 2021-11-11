@@ -2,4 +2,4 @@
   <%= link_to book.favorites.count, book_favorites_path(book), method: :delete, remote: true, class: "fas fa-heart heart_red" %>
 <% else %>
   <%= link_to book.favorites.count, book_favorites_path(book), method: :post,　remote: true, class: "fas fa-heart heart_blue" %>
-<% end %> ls -a
+<% end %>

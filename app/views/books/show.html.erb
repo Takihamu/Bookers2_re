@@ -20,19 +20,22 @@
           <td class="favorite-btn"><%= render "favorites/favorite-btn", book: @book %></td>
           <td>コメント数: <%= @book.book_comments.count %></td>
           <% if @book.user == current_user %>
+            <td class="movie-evaluation" data-score="<%= @book.evaluation %>"></td>
             <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success edit_book_#{@book.id}" %></td>
             <td><%= link_to 'Destroy', book_path(@book), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger destroy_book_#{@book.id}"%></td>
           <% end %>
-
-          <td><%= form_with model:[@book,@book_comment]do |f| %>></td>
-            <td><%= f.text_area :comment, size:"90×5" %>></td>
-             <td><%= f.submit '送信' %>></td>
-              <% end %>
-            <td class="favorite-btn"><%= render "favorites/favorite-btn", book: @book %></td>
-            <td class="comments-count">コメント数: <%= @book.book_comments.count %></td>
         </tr>
       </table>
       <%= render 'books/comment', book: @book,book_comment: @book_comment%>
     </div>
   </div>
 </div>
+<script>
+  $('.movie-evaluation').raty({
+    readOnly: true,
+    score: function() {
+      return $(this).attr('data-score');
+    },
+    path: '/assets/'
+  });
+</script>
